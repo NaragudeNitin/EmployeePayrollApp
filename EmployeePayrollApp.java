@@ -3,32 +3,34 @@ package com.employee.wage;
 import java.util.Random;
 
 public class EmployeePayrollApp {
-	private static int WagePerHr=20;
-
+	private static final String FULL_TIME ="FULL_TIME";
+	private static final String PART_TIME ="PART_TIME";
+	private static final int monthDays =20;
+	
 	public static void main(String[] args) {
-		Random random = new Random();
-		int rand =random.nextInt(3);
-		int fullSalary;
-		int partSalary;
-		int fulltime=8;
-		int parttime=4;
-		switch (rand) {
-		case 0:
-			System.out.println("you were absent today");
-			break;
-		case 1:
-			System.out.println("you are present today.");
-			fullSalary=WagePerHr*fulltime;
-			System.out.println("Your full time salary is "+ fullSalary+ "Rs");
-			break;
-		case 2:
-			System.out.println("You did Part time today.");
-			partSalary= WagePerHr*parttime;
-			System.out.println("Your part time salary is: "+partSalary + "Rs");
-			break;
+		EmployeePayrollApp full = new EmployeePayrollApp();
+		full.noOfHrsInDay(FULL_TIME);
+		
+		int FulltimeSalary= monthDays*(full.dailySal(20, 8));
+		System.out.println("Your full time monthly salary is "+FulltimeSalary);
+//		salary=no of days* Daily salary
+		int PartTimeSal = monthDays * (full.dailySal(20, 4));
+		System.out.println("Your Monthly Part time salary is "+ PartTimeSal);
+		
+	}
+	
+	public int noOfHrsInDay(String type) {
+		switch (type) {
+		case FULL_TIME:
+			return 8;
+		case PART_TIME :
+			return 4;
 		default:
-			System.out.println("you are not employee of our company.");
-			break;
+			return 0;
 		}
+	}
+	
+	public int dailySal(int time, int hrwage) {
+		return time * hrwage;
 	}
 }
