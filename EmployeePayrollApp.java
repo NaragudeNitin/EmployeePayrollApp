@@ -1,7 +1,5 @@
 package com.employee.wage;
 
-import java.util.Random;
-
 public class EmployeePayrollApp {
 	private static final String FULL_TIME = "FULL_TIME";
 	private static final String PART_TIME = "PART_TIME";
