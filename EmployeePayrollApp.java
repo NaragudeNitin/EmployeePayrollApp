@@ -1,45 +1,36 @@
 package com.employee.wage;
 
 public class EmployeePayrollApp {
-	private static final String FULL_TIME = "FULL_TIME";
-	private static final String PART_TIME = "PART_TIME";
-	private static final int monthDays = 20;
+	public static final int IS_PART_TTIME = 1;
+	public static final int IS_FULL_TIME = 2;
 
-	public static void main(String[] args) {
-		EmployeePayrollApp nitin = new EmployeePayrollApp();
-		int hrs = nitin.noOfHrsInDay(FULL_TIME);
-		System.out.println("working time: " + hrs);
-
-		double salary = nitin.oneDaySal();
-		System.out.println("one day salary is " + salary);
-		double fullMonthSal = salary * monthDays;
-		System.out.println("so your 20 days full time sal is: " + fullMonthSal);
-
-		double sal100hr = nitin.hundredHrsal(100, 20);
-		System.out.println("Your salary for 100 working hours is: " + sal100hr);
-
-	}
-
-	public int noOfHrsInDay(String type) {
-		switch (type) {
-		case FULL_TIME:
-			return 8;
-		case PART_TIME:
-			return 4;
-		default:
-			return 0;
+	public static int computeWage(String company, int empRatePerHr, int noOfWorkingDays, int maxHrsPerMonth) {
+		int empHrs = 0;
+		int totEmpHrs = 0;
+		int totWorkingDays = 0;
+		while (totEmpHrs <= maxHrsPerMonth && totWorkingDays < noOfWorkingDays) {
+			totWorkingDays++;
+			int empcheck = (int) (Math.floor(Math.random() * 10) % 3);
+			switch (empcheck) {
+			case IS_PART_TTIME:
+				empHrs = 4;
+				break;
+			case IS_FULL_TIME:
+				empHrs = 8;
+				break;
+			default:
+				empHrs = 0;
+			}
+			totEmpHrs = totEmpHrs + empHrs;
+			System.out.println("Day: " + totWorkingDays + " Total WORKING hRS: " + empHrs);
 		}
+		int totEmpWage = totEmpHrs + empRatePerHr;
+		System.out.println("Employee Salary for company " + company + " is: " + totEmpWage);
+		return totEmpWage;
 	}
-
-	public double oneDaySal() {
-		return noOfHrsInDay(FULL_TIME) * 20;
-	}
-
-	public double oneDaysal(int wrHr) {
-		return noOfHrsInDay(PART_TIME) * wrHr;
-	}
-
-	public double hundredHrsal(int val1, int val2) {
-		return val1 * val2;
+	
+	public static void main(String[] args) {
+		computeWage("Studio", 20, 2, 10);
+		computeWage("croma", 10, 4, 20);
 	}
 }
